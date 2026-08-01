@@ -1,0 +1,14 @@
+# Fichiers et dossiers à ignorer dans l'image Docker
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.git/
+.gitignore
+*.md
+*.log
+db.sqlite3
+*.sqlite3

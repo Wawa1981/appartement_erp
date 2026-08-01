@@ -1,0 +1,5 @@
+Voir la liste des utilisateurs (username + rôle) : 
+docker compose exec db psql -U erp_user -d appartement_erp -c "SELECT id, username, role, is_active FROM users_user;"
+
+Ouvrir un shell PostgreSQL :
+docker compose exec db psql -U erp_user -d appartement_erp

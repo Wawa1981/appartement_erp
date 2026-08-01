@@ -1,0 +1,11 @@
+Ligne,Nom,Explication simple,Analogie
+DEFAULT_AUTHENTICATION_CLASSES,Authentification par défaut,Comment l’utilisateur va se connecter à l’API,"C’est comme dire : « Pour utiliser l’API, tu dois te connecter avec un token JWT »"
+DEFAULT_PERMISSION_CLASSES,Permission par défaut,Est-ce que l’utilisateur doit être connecté pour accéder à l’API ?,"Par défaut, oui, il faut être connecté. Si on met AllowAny, tout le monde peut accéder même sans compte."
+
+Paramètre,Valeur actuelle,Explication simple,Pourquoi c’est important ?
+
+ACCESS_TOKEN_LIFETIME,60 minutes,Durée de validité du token d’accès (celui qui permet d’utiliser l’API),Sécurité : le token expire après 1h
+REFRESH_TOKEN_LIFETIME,7 jours,Durée de validité du token de rafraîchissement,Permet de rester connecté plusieurs jours sans se reconnecter
+ROTATE_REFRESH_TOKENS,True,"À chaque fois que tu utilises le refresh token, Django t’en donne un nouveau",Sécurité renforcée
+BLACKLIST_AFTER_ROTATION,True,L’ancien refresh token devient invalide après avoir été utilisé,Empêche qu’un token volé soit réutilisé
+AUTH_HEADER_TYPES,"('Bearer',)",Format du token dans les requêtes HTTP,L’API attend : Authorization: Bearer xxxxx
