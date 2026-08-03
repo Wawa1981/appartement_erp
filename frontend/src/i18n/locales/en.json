@@ -305,7 +305,6 @@
     "accountsInDb": "Accounts in database",
     "weekAvg": "Current week average",
     "includingToday": "including {{n}} today",
-    "adminProfileHint": "Administrator account — no trade specialties or station payment. Manage via dashboard and administration.",
     "notifReminder": "Booking reminder",
     "notifReminderSub": "24h before each slot",
     "notifPayment": "Payment confirmation",

@@ -305,7 +305,6 @@
     "accountsInDb": "Comptes en base",
     "weekAvg": "Moy. semaine en cours",
     "includingToday": "dont {{n}} aujourd'hui",
-    "adminProfileHint": "Compte administrateur — pas de spécialités métier ni de paiement poste. Gestion via le dashboard et l'administration.",
     "notifReminder": "Rappel de réservation",
     "notifReminderSub": "24h avant chaque créneau",
     "notifPayment": "Confirmation de paiement",

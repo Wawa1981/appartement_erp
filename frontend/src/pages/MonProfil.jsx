@@ -443,12 +443,6 @@ export default function MonProfil() {
                   </>
                 )}
 
-                {isAdmin && (
-                  <p className="text-xs text-[#7A6E62] bg-[#EDE7DA] border border-[rgba(28,23,20,0.08)] rounded-sm p-3">
-                    {t("app.adminProfileHint")}
-                  </p>
-                )}
-
                 <button
                   type="button"
                   onClick={saveInfos}
