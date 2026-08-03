@@ -1,0 +1,52 @@
+# Build context : ./backend (voir docker-compose.yml)
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Git / IDE
+.git
+.gitignore
+.idea
+.vscode
+.DS_Store
+
+# Python junk
+__pycache__
+**/__pycache__
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info
+.eggs
+*.egg
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.coverage
+htmlcov
+.tox
+.nox
+
+# Venv local (image installe via requirements.txt)
+venv
+.venv
+ENV
+env
+
+# Runtime / données locales
+*.log
+db.sqlite3
+*.sqlite3
+media
+staticfiles
+static_root
+
+# Docs / hors runtime
+*.md
+docs
+
+# Tests optionnels (garder si besoin en CI image)
+# tests/

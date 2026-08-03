@@ -1,13 +1,16 @@
 # ===========================================
-# Appartement ERP - .gitignore
+# L'Appartement ERP — .gitignore
 # ===========================================
 
-# --- Environnement & Secrets ---
+# --- Secrets & environnement ---
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 *.pem
 *.key
+*.p12
+secrets/
+credentials/
 
 # --- Python / Django ---
 __pycache__/
@@ -15,37 +18,51 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
+*.egg
+*.egg-info/
 .eggs/
-lib/
-lib64/
+eggs/
+develop-eggs/
 parts/
 sdist/
 var/
 wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 MANIFEST
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
 
-# Virtual environments
+# Venv
 venv/
+.venv/
 ENV/
 env/
-.venv/
 virtualenv/
 
-# Django
+# Django runtime
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
 staticfiles/
+static_root/
+
+# Coverage / tests
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+coverage.xml
+*.cover
+*.py,cover
+nosetests.xml
 
 # --- Node / Frontend ---
 node_modules/
@@ -53,46 +70,55 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-.pnpm-debug.log*
+.pnpm-store/
+.npm/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Vite
+# Builds Vite / tooling
 dist/
+dist-ssr/
 .vite/
+*.local
+.turbo/
+.cache/
 
 # --- Docker ---
 docker-compose.override.yml
+docker-compose.*.local.yml
 
 # --- IDE & OS ---
 .idea/
 .vscode/
+*.code-workspace
 *.swp
 *.swo
 *~
 .DS_Store
 Thumbs.db
+Desktop.ini
 
-# --- Tests & Coverage ---
-.coverage
-htmlcov/
-.tox/
-.nox/
-.pytest_cache/
-coverage.xml
-*.cover
-*.py,cover
-
-# --- Misc ---
+# --- Backups & temp ---
 *.bak
+*.bak.*
 *.tmp
 *.temp
 *.cache
 *.pid
 *.seed
 *.pid.lock
-
-# Garder le dossier migrations mais ignorer les fichiers compilés
-# (les migrations Python doivent être commités)
-!**/migrations/__init__.py
-
 .~lock.*
 *~
+
+# --- Misc projet ---
+# dumps SQL locaux (ne pas versionner de prod)
+*.sql.gz
+dump*.sql
+!ScriptpostgreSQL
+
+# fichiers d’export locaux
+*.csv
+!**/fixtures/**/*.csv

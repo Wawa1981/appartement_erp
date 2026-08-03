@@ -1,14 +1,34 @@
-# Fichiers et dossiers à ignorer dans l'image Docker
-venv/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-.env
-.git/
+# Racine — peu utilisé (build context = backend/ ou frontend/)
+# Conservé pour `docker build` depuis la racine si besoin.
+
+.git
+.github
 .gitignore
+.dockerignore
+
+.env
+.env.*
+!.env.example
+
+**/__pycache__
+**/*.py[cod]
+**/venv
+**/.venv
+**/node_modules
+**/dist
+**/.vite
+
 *.md
+*.md.bak*
+docs/
+README.md.bak*
+
 *.log
-db.sqlite3
 *.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+.idea
+.vscode
+.DS_Store
