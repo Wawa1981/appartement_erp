@@ -134,6 +134,8 @@ LANGUAGES = [
     ('en', 'English'),
 ]
 
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
 USE_I18N = True
 USE_TZ = True
 
@@ -166,10 +168,24 @@ SIMPLE_JWT = {
 }
 
 
-# =============================================
-# CORS
-# =============================================
-# Ports front : 5175 en Docker (compose), 5173 possible hors Docker
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "").strip()
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5175").rstrip("/")
+DEFAULT_FROM_EMAIL = os.getenv(
+    "DEFAULT_FROM_EMAIL", "L'Appartement <noreply@appartement.local>"
+)
+EMAIL_BACKEND = os.getenv(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend"
+    if DEBUG
+    else "django.core.mail.backends.smtp.EmailBackend",
+)
+EMAIL_HOST = os.getenv("EMAIL_HOST", "localhost")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ("true", "1", "yes")
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5175",
     "http://127.0.0.1:5175",
@@ -178,11 +194,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://frontend:5175",
     "http://frontend:5173",
 ]
-
-if DEBUG:
-    # On peut décommenter pour du dev très permissif si besoin :
-    # CORS_ALLOW_ALL_ORIGINS = True
-    pass
+if FRONTEND_URL and FRONTEND_URL not in CORS_ALLOWED_ORIGINS:
+    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
+_extra_cors = os.getenv("CORS_ALLOWED_ORIGINS", "")
+for origin in _extra_cors.split(","):
+    origin = origin.strip()
+    if origin and origin not in CORS_ALLOWED_ORIGINS:
+        CORS_ALLOWED_ORIGINS.append(origin)
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]

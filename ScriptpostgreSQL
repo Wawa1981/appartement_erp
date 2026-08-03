@@ -1,0 +1,11 @@
+1. Voir toutes les tables:
+\dt
+
+2. Compter le nombre d’utilisateurs:
+SELECT COUNT(*) FROM users_user;
+
+3. Voir les utilisateurs + leur rôle
+SELECT id, username, role, is_active, date_joined FROM users_user;
+
+4. Voir la structure de la table des utilisateurs
+\d users_user

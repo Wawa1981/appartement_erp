@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Compte créé avec succès."
+msgstr "Account created successfully."
+
+msgid "Si un compte existe avec cet email, un lien de réinitialisation a été envoyé."
+msgstr "If an account exists with this email, a reset link has been sent."
+
+msgid "Réinitialisation de votre mot de passe — L'Appartement"
+msgstr "Reset your password — L'Appartement"
+
+msgid "Envoi email en échec (voir logs serveur)."
+msgstr "Email send failed (see server logs)."
+
+msgid "Lien de réinitialisation invalide."
+msgstr "Invalid reset link."
+
+msgid "Lien expiré ou déjà utilisé. Refaites une demande."
+msgstr "Link expired or already used. Please request a new one."
+
+msgid "Mot de passe mis à jour. Vous pouvez vous connecter."
+msgstr "Password updated. You can log in."
+
+msgid "Google OAuth non configuré. Définir GOOGLE_CLIENT_ID dans l'environnement."
+msgstr "Google OAuth is not configured. Set GOOGLE_CLIENT_ID in the environment."
+
+msgid "Émetteur du token Google invalide."
+msgstr "Invalid Google token issuer."
+
+msgid "Email Google non vérifié."
+msgstr "Google email is not verified."
+
+msgid "Token Google invalide ou expiré."
+msgstr "Invalid or expired Google token."
+
+msgid "Fournir credential/id_token ou access_token Google."
+msgstr "Provide a Google credential/id_token or access_token."
+
+msgid "Token Google invalide."
+msgstr "Invalid Google token."
+
+msgid "Impossible de valider le compte Google."
+msgstr "Could not validate the Google account."
+
+msgid "Impossible de récupérer l'email Google."
+msgstr "Could not retrieve the Google email."
+
+msgid "Ce compte est désactivé."
+msgstr "This account is disabled."
+
+msgid "Utilisateur introuvable."
+msgstr "User not found."
+
+msgid "Vous ne pouvez pas désactiver votre propre compte."
+msgstr "You cannot deactivate your own account."
+
+msgid "Un compte existe déjà avec cet email."
+msgstr "An account already exists with this email."
+
+msgid "Les mots de passe ne correspondent pas."
+msgstr "Passwords do not match."
+
+msgid "Email ou mot de passe incorrect."
+msgstr "Invalid email or password."
+
+msgid "Rôle invalide."
+msgstr "Invalid role."

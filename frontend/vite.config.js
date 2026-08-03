@@ -1,22 +1,16 @@
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+
+const port = Number(process.env.FRONTEND_HOST_PORT || process.env.PORT || 5175);
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   server: {
-    host: true,           // Écoute sur 0.0.0.0 (important pour Docker)
-    // 5175 = Appartement ERP (5173 = eternalkidsart_web)
-    port: 5175,
+    host: true,
+    port,
     strictPort: true,
-    watch: {
-      usePolling: true,   // Nécessaire pour le hot-reload dans Docker (surtout sur Windows/Mac)
-    },
-    hmr: {
-      host: 'localhost',  // Pour que le navigateur se connecte correctement depuis l'hôte
-    },
+    watch: { usePolling: true },
+    hmr: { host: "localhost", port, clientPort: port },
   },
-})
+});

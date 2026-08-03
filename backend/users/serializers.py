@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext as _
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import UserRole
+from .models import Reservation, UserRole
 
 User = get_user_model()
 
@@ -20,12 +21,13 @@ class UserSerializer(serializers.ModelSerializer):
             "role",
             "is_active",
             "date_joined",
+            "phone",
         ]
         read_only_fields = ["id", "date_joined"]
 
 
 class UserMeSerializer(serializers.ModelSerializer):
-    """Profil de l'utilisateur connecté (lecture / mise à jour limitée)."""
+    """Profil connecté — lecture / PATCH (champs métier)."""
 
     class Meta:
         model = User
@@ -38,8 +40,52 @@ class UserMeSerializer(serializers.ModelSerializer):
             "role",
             "is_active",
             "date_joined",
+            "phone",
+            "bio",
+            "specialties",
+            "notify_reminder",
+            "notify_payment",
+            "notify_slots",
+            "notify_newsletter",
         ]
         read_only_fields = ["id", "username", "role", "is_active", "date_joined"]
+
+
+class ReservationSerializer(serializers.ModelSerializer):
+    """Réservation API."""
+
+    client_name = serializers.SerializerMethodField()
+    client_email = serializers.EmailField(source="user.email", read_only=True)
+
+    class Meta:
+        model = Reservation
+        fields = [
+            "id",
+            "user",
+            "client_name",
+            "client_email",
+            "espace",
+            "poste",
+            "poste_id",
+            "type_poste",
+            "date",
+            "start_time",
+            "end_time",
+            "montant",
+            "statut",
+            "address",
+            "service_id",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "user", "created_at", "updated_at", "client_name", "client_email"]
+
+    def get_client_name(self, obj):
+        return obj.user.get_full_name() or obj.user.email
+
+    def create(self, validated_data):
+        validated_data["user"] = self.context["request"].user
+        return super().create(validated_data)
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -59,13 +105,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     def validate_email(self, value):
         email = value.strip().lower()
         if User.objects.filter(email__iexact=email).exists():
-            raise serializers.ValidationError("Un compte existe déjà avec cet email.")
+            raise serializers.ValidationError(_("Un compte existe déjà avec cet email."))
         return email
 
     def validate(self, attrs):
         if attrs["password"] != attrs["password_confirm"]:
             raise serializers.ValidationError(
-                {"password_confirm": "Les mots de passe ne correspondent pas."}
+                {"password_confirm": _("Les mots de passe ne correspondent pas.")}
             )
         validate_password(attrs["password"])
         return attrs
@@ -119,15 +165,15 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
             user = User.objects.get(email__iexact=email)
         except User.DoesNotExist:
             raise serializers.ValidationError(
-                "Email ou mot de passe incorrect.",
+                _("Email ou mot de passe incorrect."),
             )
 
         if not user.is_active:
-            raise serializers.ValidationError("Ce compte est désactivé.")
+            raise serializers.ValidationError(_("Ce compte est désactivé."))
 
         if not user.check_password(password):
             raise serializers.ValidationError(
-                "Email ou mot de passe incorrect.",
+                _("Email ou mot de passe incorrect."),
             )
 
         refresh = self.get_token(user)
@@ -146,5 +192,24 @@ class AdminUserUpdateSerializer(serializers.ModelSerializer):
 
     def validate_role(self, value):
         if value not in UserRole.values:
-            raise serializers.ValidationError("Rôle invalide.")
+            raise serializers.ValidationError(_("Rôle invalide."))
         return value
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    uid = serializers.CharField()
+    token = serializers.CharField()
+    password = serializers.CharField(write_only=True, min_length=8)
+    password_confirm = serializers.CharField(write_only=True)
+
+    def validate(self, attrs):
+        if attrs["password"] != attrs["password_confirm"]:
+            raise serializers.ValidationError(
+                {"password_confirm": _("Les mots de passe ne correspondent pas.")}
+            )
+        validate_password(attrs["password"])
+        return attrs

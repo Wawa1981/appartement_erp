@@ -1,1 +1,109 @@
 @import "tailwindcss";
+
+/**
+ * Palette L'Appartement — maquette src.zip
+ * Fond #F5F0E8 · cartes #EDE7DA · accent #B8956A · texte #1C1714
+ */
+:root {
+  --background: #f5f0e8;
+  --foreground: #1c1714;
+  --card: #ede7da;
+  --card-foreground: #1c1714;
+  --popover: #ede7da;
+  --popover-foreground: #1c1714;
+  --primary: #1c1714;
+  --primary-foreground: #f5f0e8;
+  --secondary: #f5f0e8;
+  --secondary-foreground: #1c1714;
+  --muted: #ddd4c0;
+  --muted-foreground: #7a6e62;
+  --accent: #b8956a;
+  --accent-foreground: #f5f0e8;
+  --destructive: #c0392b;
+  --destructive-foreground: #f5f0e8;
+  --border: rgba(28, 23, 20, 0.12);
+  --input-background: #ede7da;
+  --switch-background: #c4b89e;
+  --ring: #b8956a;
+  --sidebar: #1c1714;
+  --sidebar-foreground: #f5f0e8;
+  --sidebar-primary: #b8956a;
+  --sidebar-primary-foreground: #1c1714;
+  --sidebar-accent: #2a2420;
+  --sidebar-accent-foreground: #f5f0e8;
+  --sidebar-border: rgba(245, 240, 232, 0.12);
+  --sidebar-ring: #b8956a;
+}
+
+@theme {
+  --color-background: #f5f0e8;
+  --color-foreground: #1c1714;
+  --color-card: #ede7da;
+  --color-card-foreground: #1c1714;
+  --color-popover: #ede7da;
+  --color-popover-foreground: #1c1714;
+  --color-primary: #1c1714;
+  --color-primary-foreground: #f5f0e8;
+  --color-secondary: #f5f0e8;
+  --color-secondary-foreground: #1c1714;
+  --color-muted: #ddd4c0;
+  --color-muted-foreground: #7a6e62;
+  --color-accent: #b8956a;
+  --color-accent-foreground: #f5f0e8;
+  --color-destructive: #c0392b;
+  --color-border: rgba(28, 23, 20, 0.12);
+  --color-ring: #b8956a;
+  --color-input: #ede7da;
+  --color-sidebar: #1c1714;
+  --color-sidebar-foreground: #f5f0e8;
+  --color-sidebar-primary: #b8956a;
+  --color-sidebar-primary-foreground: #1c1714;
+  --color-sidebar-accent: #2a2420;
+  --color-sidebar-accent-foreground: #f5f0e8;
+  --color-sidebar-border: rgba(245, 240, 232, 0.12);
+  --color-sidebar-ring: #b8956a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #f5f0e8;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #f5f0e8;
+  color: #1c1714;
+  -webkit-font-smoothing: antialiased;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #f5f0e8;
+  color: #1c1714;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  background-color: #ede7da;
+  color: #1c1714;
+}
+
+.recharts-wrapper,
+.recharts-surface {
+  background: transparent !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

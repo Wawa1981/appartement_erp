@@ -1,7 +1,4 @@
 services:
-  # ===========================================
-  # PostgreSQL (Base de données)
-  # ===========================================
   db:
     image: postgres:16-alpine
     container_name: appartement_db
@@ -15,18 +12,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      # Exposition sur le port hôte configurable (défaut 5433)
       - "${POSTGRES_HOST_PORT:-5433}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
-    # Réseau par défaut (bridge)
 
-  # ===========================================
-  # Backend Django (API)
-  # ===========================================
   backend:
     build:
       context: ./backend
@@ -36,32 +28,24 @@ services:
     env_file:
       - .env
     environment:
-      # On force la DATABASE_URL vers le service Docker "db"
-      # (et pas localhost). C'est la clé du mode "tout Docker".
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      # Autres variables utiles
       - DEBUG=${DEBUG}
       - SECRET_KEY=${SECRET_KEY}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:5175}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
     volumes:
       - ./backend:/app
     ports:
       - "${BACKEND_HOST_PORT:-8000}:8000"
     command: >
       sh -c "
-        echo 'Attente de la base de données...' &&
         python manage.py migrate --noinput &&
         python manage.py runserver 0.0.0.0:8000
       "
     depends_on:
       db:
         condition: service_healthy
-    # Pour le développement, on peut ajouter :
-    # stdin_open: true
-    # tty: true
 
-  # ===========================================
-  # Frontend React + Vite (optionnel en Docker)
-  # ===========================================
   frontend:
     build:
       context: ./frontend
@@ -69,17 +53,20 @@ services:
     container_name: appartement_frontend
     restart: unless-stopped
     ports:
-      # Host 5175 par défaut — 5173 est réservé à eternalkidsart_web
-      - "${FRONTEND_HOST_PORT:-5175}:5175"
+      - "${FRONTEND_HOST_PORT:-5175}:${FRONTEND_HOST_PORT:-5175}"
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    env_file:
+      - .env
     environment:
-      - CHOKIDAR_USEPOLLING=true   # Nécessaire pour le hot reload sous Docker sur certains systèmes
-    command: npm run dev -- --host 0.0.0.0 --port 5175
+      - CHOKIDAR_USEPOLLING=true
+      - FRONTEND_HOST_PORT=${FRONTEND_HOST_PORT:-5175}
+      - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID:-${GOOGLE_CLIENT_ID:-}}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:8000/api}
+    command: npm run dev -- --host 0.0.0.0 --port ${FRONTEND_HOST_PORT:-5175}
     depends_on:
       - backend
 
 volumes:
   postgres_data:
-

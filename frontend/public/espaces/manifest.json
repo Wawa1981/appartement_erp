@@ -1,0 +1,84 @@
+{
+  "le137": [
+    {
+      "url": "/espaces/le137/01-open-space.jpg",
+      "label": "Open space — verrière",
+      "w": 1024,
+      "h": 1400
+    },
+    {
+      "url": "/espaces/le137/02-bacs.jpg",
+      "label": "Espace shampooing",
+      "w": 1024,
+      "h": 1536
+    },
+    {
+      "url": "/espaces/le137/03-details.jpg",
+      "label": "Détails & décoration",
+      "w": 900,
+      "h": 1600
+    },
+    {
+      "url": "/espaces/le137/04-accueil.jpg",
+      "label": "Réception & accueil",
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "url": "/espaces/le137/05-bar.jpg",
+      "label": "Bar à café",
+      "w": 1224,
+      "h": 1012
+    },
+    {
+      "url": "/espaces/le137/06-salon.jpg",
+      "label": "Salon & postes",
+      "w": 1600,
+      "h": 1200
+    }
+  ],
+  "le80": [
+    {
+      "url": "/espaces/le80/01-postes.jpg",
+      "label": "Postes & miroirs",
+      "w": 1024,
+      "h": 1536
+    },
+    {
+      "url": "/espaces/le80/02-fauteuils.jpg",
+      "label": "Fauteuils",
+      "w": 1024,
+      "h": 1536
+    },
+    {
+      "url": "/espaces/le80/03-ambiance.jpg",
+      "label": "Ambiance",
+      "w": 1024,
+      "h": 1536
+    },
+    {
+      "url": "/espaces/le80/04-restauration.jpg",
+      "label": "Salle de restauration",
+      "w": 1024,
+      "h": 1024
+    },
+    {
+      "url": "/espaces/le80/05-reception.jpg",
+      "label": "Réception",
+      "w": 1024,
+      "h": 1024
+    },
+    {
+      "url": "/espaces/le80/06-bar.jpg",
+      "label": "Bar à café",
+      "w": 1224,
+      "h": 1012
+    },
+    {
+      "url": "/espaces/le80/07-espace.jpg",
+      "label": "Vue d'ensemble",
+      "w": 1600,
+      "h": 1200
+    }
+  ]
+}
